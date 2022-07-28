@@ -240,11 +240,10 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      # Checkout code from git
       # Add ssh keys with fingerprint
       - add_ssh_keys:
         fingerprints:
-          - "a6:5a:93:96:be:e0:d6:fa:5e:c6:e8:1d:ad:b8:86:8c"
+          - "[a6:5a:93:96:be:e0:d6:fa:5e:c6:e8:1d:ad:b8:86:8c]"
       # attach workspace
       - attach_workspace:
           at: ~/
@@ -288,9 +287,6 @@ jobs:
             fi
       - destroy-environment
       - revert-migrations
-
-
-        exit 1
       # Here's where you will add some code to rollback on failure
 
 workflows:
