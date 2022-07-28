@@ -17,7 +17,7 @@ commands:
     parameters:
       # Add parameter here
       workflow_id:
-        default:
+        default: "${CIRCLE_WORKFLOW_ID:0:7}"
         type: string
 
     steps:
@@ -273,7 +273,7 @@ jobs:
             cd backend
             npm install
             npm run migrations > migrations_dump.txt
-            cat migrations_dump.txt
+        # cat migrations_dump.txt
         # Send migration
       - run:
           name: Send migration results to kvdb
