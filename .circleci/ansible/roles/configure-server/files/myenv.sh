@@ -1,4 +1,3 @@
-
 export TYPEORM_CONNECTION=postgres
 export TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts
 export TYPEORM_HOST=database-1.cvtwgjsfn9l2.us-east-1.rds.amazonaws.com
