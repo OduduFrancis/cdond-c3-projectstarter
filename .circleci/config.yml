@@ -44,7 +44,7 @@ commands:
           # Add when this will run
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS=$(curl --insecure "https://kvdb.io/AA7NfcqrTmoisVLbyUtrLC/migration_<< parameters.workflow_id >>")  
+            SUCCESS=$(curl --insecure "https://kvdb.io/XvmnYuBT7skCdxBkm1h13X/migration_<< parameters.workflow_id >>")  
             # Logic for reverting the database state
               
             if (( $SUCCESS == 1 ));
@@ -52,7 +52,7 @@ commands:
                 cd ~/project/backend
                 npm install
                 npm run build
-                npm run migrations:revert
+                npm run migration:revert
             fi
 
 jobs:
