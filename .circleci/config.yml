@@ -10,8 +10,8 @@ commands:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
-  
-   install_nodejs:
+
+  install_nodejs:
     description: Install Node.js 13
     steps:
       - run:
@@ -319,7 +319,7 @@ jobs:
             - "a6:5a:93:96:be:e0:d6:fa:5e:c6:e8:1d:ad:b8:86:8c"
 
       - attach_workspace:
-        at: ~/
+          at: ~/
 
       - install_nodejs
       - install_awscli
@@ -365,17 +365,14 @@ jobs:
             - "a6:5a:93:96:be:e0:d6:fa:5e:c6:e8:1d:ad:b8:86:8c"
 
       - attach_workspace:
-        at: ~/
+          at: ~/
 
       - install_nodejs
       - install_awscli
       - install_ansible
-  
+
       - run:
           name: Deploy backend
-          command: |
-            # your code here
-            name: Deploy backend
           command: |
             cd backend
             npm i
@@ -386,10 +383,10 @@ jobs:
             mkdir files
             tar -C ../../../backend -czvf artifact.tar.gz .
             cd ../
-            
+
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
-            
+
             ansible-playbook -i inventory.txt deploy-backend.yml
 
       - destroy-environment
