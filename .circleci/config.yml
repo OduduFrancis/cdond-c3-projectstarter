@@ -481,8 +481,10 @@ jobs:
             echo Stack names: "${STACKS[@]}"
             export OldWorkflowID=$(curl --insecure https://kvdb.io/XvmnYuBT7skCdxBkm1h13X/old_workflow_id)
             echo Old Workflow ID: $OldWorkflowID
+
       - run:
-          name: Remove old stacks and files
+          name: Remove old stacks and filess
+
           command: |
             export OldWorkflowID=$(curl --insecure https://kvdb.io/XvmnYuBT7skCdxBkm1h13X/old_workflow_id)
             echo Old Workflow ID: $OldWorkflowID 
