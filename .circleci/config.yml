@@ -409,20 +409,19 @@ jobs:
           command: |
             # your code here
             BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
-              --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:Name,Values-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --output text)
-
-            export API_URL="http://${BACKEND_PUBLIC_IP}:3030"
-            echo "${BACKEND_PUBLIC_IP}"
-            echo backend-${CIRCLE_WORKFLOW_ID:0:7}
-            echo $API_URL
-            if curl "${API_URL}/api/status" | grep "ok"
-            then
-              exit 0
-            else
-              exit 1
-            fi
+                --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+                --query 'Reservations[*].Instances[*].PublicIpAddress' \
+                --output text)
+              export API_URL=http://${BACKEND_PUBLIC_IP}:3030
+              echo ${BACKEND_PUBLIC_IP}
+              echo backend-${CIRCLE_WORKFLOW_ID:0:7}
+              echo ${API_URL}
+              if curl -s $API_URL/api/status | grep "ok"
+              then
+                exit 0
+              else
+                exit 1
+              fi
       - run:
           name: Frontend smoke test.
           command: |
@@ -480,12 +479,12 @@ jobs:
                 --query "StackSummaries[*].StackName" \
                 --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
             echo Stack names: "${STACKS[@]}"
-            export OldWorkflowID=$(curl --insecure https://kvdb.io/33GxcCpH7rHocPuWALvF32/old_workflow_id)
+            export OldWorkflowID=$(curl --insecure https://kvdb.io/XvmnYuBT7skCdxBkm1h13X/old_workflow_id)
             echo Old Workflow ID: $OldWorkflowID
       - run:
           name: Remove old stacks and files
           command: |
-            export OldWorkflowID=$(curl --insecure https://kvdb.io/33GxcCpH7rHocPuWALvF32/old_workflow_id)
+            export OldWorkflowID=$(curl --insecure https://kvdb.io/XvmnYuBT7skCdxBkm1h13X/old_workflow_id)
             echo Old Workflow ID: $OldWorkflowID 
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
