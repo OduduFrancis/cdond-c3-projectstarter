@@ -1,4 +1,5 @@
 URL01: https://github.com/OduduFrancis/cdond-c3-projectstarter
 
-URL02: http://udapeople-3a8368d.s3-website-us-east-1.amazonaws.com/#/employees
+URL02: http://udapeople-6cede0b.s3-website-us-east-1.amazonaws.com/#/employees
+
 
