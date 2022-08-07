@@ -293,6 +293,7 @@ jobs:
             cd backend
             npm install
             npm run migrations > migrations_dump.txt
+
         # cat migrations_dump.txt
         # Send migration
       - run:
@@ -302,7 +303,7 @@ jobs:
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
               curl --insecure https://kvdb.io/XvmnYuBT7skCdxBkm1h13X/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
-              
+
             fi
       - destroy-environment
       - revert-migrations
